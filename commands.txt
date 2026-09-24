@@ -1,0 +1,7 @@
+mkdir git-check
+cd git-check/
+git clone https://tms.inf.elte.hu/git/8908/nymqpu/rc01e963ff075ac3242792ba3d nymqpu
+git log
+cd nymqpu/
+git log
+git checkout 86cfbfb5208743b7c107e92902ea641c67bd1ec6
