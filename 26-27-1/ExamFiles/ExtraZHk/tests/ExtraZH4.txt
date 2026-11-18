@@ -1,0 +1,28 @@
+neighbourhood 0 0 == [0]
+neighbourhood 0 1 == [-1,0,1]
+neighbourhood 0 (-1) == [1,0,-1]
+neighbourhood 0 2 == [-2,-1,0,1,2]
+neighbourhood 0 (-2) == [2,1,0,-1,-2]
+neighbourhood 1 0 == [1]
+neighbourhood 1 1 == [0,1,2]
+neighbourhood 1 (-1) == [2,1,0]
+neighbourhood 1 2 == [-1,0,1,2,3]
+neighbourhood 1 (-2) == [3,2,1,0,-1]
+neighbourhood 6 7 == [-1..13]
+neighbourhood 6 (-7) == [13,12..(-1)]
+concatEverySecond [] == []
+concatEverySecond [[1,2]] == []
+concatEverySecond [[1,2],[3,4]] == [3,4]
+concatEverySecond [[1,2],[3,4],[5,6]] == [3,4]
+concatEverySecond [[1,2],[3,4],[5,6],[7,8]] == [3,4,7,8]
+concatEverySecond ["1","2","3","4","5","6"] == "246"
+concatEverySecond ["foo","Hello, ","bar","World!","foo"] == "Hello, World!"
+deleteElem 1 [] == []
+deleteElem 1 [1] == []
+deleteElem 1 [2] == [2]
+deleteElem 1 [1..10] == [2..10]
+deleteElem 42 [50,46..30] == [50,46] ++ [38,34,30]
+deleteElem 67 [58,16,67,59,69,67,42] == [58,16,59,69,42]
+deleteElem 'a' "almafa" == "lmf"
+deleteElem 'l' "Hello world!" == "Heo word!"
+deleteElem False [False,True,True,True,False,False,False,True] == [True,True,True,True]

@@ -1,0 +1,78 @@
+general {
+  module = haskell
+  grade = True
+  language = hu
+  minscore = 1
+}
+
+haskell {
+  safemode = True
+  autofix = True
+    ghcoptions =
+    - fdefer-type-errors
+}
+
+optional "sphereVolume" {
+    points = 1
+    pretest =
+    - sphereVolume
+    tests =
+    - abs (sphereVolume 0 - 0) <= 1e-6
+    - abs (sphereVolume 1 - 4.1887902047863905) <= 1e-6
+    - abs (sphereVolume 2 - 33.510321638291124) <= 1e-6
+    - abs (sphereVolume 3 - 113.09733552923254) <= 1e-6
+    - abs (sphereVolume 4 - 268.082573106329) <= 1e-6
+    - abs (sphereVolume 5 - 523.5987755982989) <= 1e-6
+    - abs (sphereVolume 6 - 904.7786842338603) <= 1e-6
+    - abs (sphereVolume 7 - 1436.7550402417319) <= 1e-6
+    - abs (sphereVolume 8 - 2144.660584850632) <= 1e-6
+    - abs (sphereVolume 9 - 3053.6280592892786) <= 1e-6
+    - abs (sphereVolume 10 - 4188.7902047863905) <= 1e-6
+    - abs (sphereVolume (-1) - 0) <= 1e-6
+    - abs (sphereVolume (-2) - 0) <= 1e-6
+    - abs (sphereVolume (-3) - 0) <= 1e-6
+    - abs (sphereVolume (-4) - 0) <= 1e-6
+    - abs (sphereVolume (-5) - 0) <= 1e-6
+    - abs (sphereVolume (-6) - 0) <= 1e-6
+    - abs (sphereVolume (-7) - 0) <= 1e-6
+    - abs (sphereVolume (-8) - 0) <= 1e-6
+    - abs (sphereVolume (-9) - 0) <= 1e-6
+    - abs (sphereVolume (-10) - 0) <= 1e-6
+    - abs (sphereVolume 0.5 - 0.5235987755982988) <= 1e-6
+    - abs (sphereVolume 1.5 - 14.137166941154068) <= 1e-6
+    - abs (sphereVolume 2.5 - 65.44984694978736) <= 1e-6
+    - abs (sphereVolume pi - 129.87878804533656) <= 1e-6
+    - abs (sphereVolume 3.5 - 179.594380030432) <= 1e-6
+}
+
+optional "productOfLengths" {
+    points = 2
+    pretest =
+    - productOfLengths
+    tests =
+    - productOfLengths [] == 1
+    - productOfLengths [[]] == 0
+    - productOfLengths [[1]] == 1
+    - productOfLengths [[1,2]] == 2
+    - productOfLengths [[1],[1]] == 1
+    - productOfLengths [[1,2],[4,3]] == 4
+    - productOfLengths [[1..2],[1..3],[1..5],[1..7]] == 210
+    - productOfLengths ["hello"] == 5
+    - productOfLengths ["hello","world"] == 25
+    - productOfLengths ["foo","bar","foo","bar"] == 81
+    - productOfLengths [[True,False],[False,True,False,True],[False],[True,True],[True,False,True]] == 48
+}
+
+optional "onlyLowercaseVowelsAndUppercaseNonVowels" {
+    points = 3
+    pretest =
+    - onlyLowercaseVowelsAndUppercaseNonVowels
+    tests =
+    - onlyLowercaseVowelsAndUppercaseNonVowels "" == ""
+    - onlyLowercaseVowelsAndUppercaseNonVowels "aeiou" == "aeiou"
+    - onlyLowercaseVowelsAndUppercaseNonVowels "AEIOU" == ""
+    - onlyLowercaseVowelsAndUppercaseNonVowels "aEiOu" == "aiu"
+    - onlyLowercaseVowelsAndUppercaseNonVowels "AeIoU" == "eo"
+    - onlyLowercaseVowelsAndUppercaseNonVowels "Hello World!" == "HeoWo"
+    - take 26 (onlyLowercaseVowelsAndUppercaseNonVowels ['A'..]) == "BCDFGHJKLMNPQRSTVWXYZaeiou"
+}

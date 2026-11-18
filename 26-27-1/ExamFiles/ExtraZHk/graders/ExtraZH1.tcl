@@ -1,0 +1,73 @@
+general {
+  module = haskell
+  grade = True
+  language = hu
+  minscore = 1
+}
+
+haskell {
+  safemode = True
+  autofix = True
+    ghcoptions =
+    - fdefer-type-errors
+}
+
+optional "areSameParity" {
+    points = 1
+    pretest =
+    - areSameParity
+    tests =
+    - areSameParity (0, 0, 0) == True
+    - areSameParity (1, 0, 0) == False
+    - areSameParity (0, 1, 0) == False
+    - areSameParity (0, 0, 1) == False
+    - areSameParity (1, 1, 1) == True
+    - areSameParity (0, 1, 1) == False
+    - areSameParity (1, 0, 1) == False
+    - areSameParity (1, 1, 0) == False
+    - areSameParity (0, 2, 4) == True
+    - areSameParity (1, 3, 5) == True
+    - areSameParity (-123456, 987654, -765432) == True
+    - areSameParity (-234567, 876543, -654321) == True
+    - areSameParity (-123456, 876543, -765432) == False
+    - areSameParity (-234567, 987654, -654321) == False
+}
+
+optional "selectElems" {
+    points = 2
+    pretest =
+    - selectElems
+    tests =
+    - selectElems [] [] == []
+    - selectElems [1] [] == []
+    - selectElems [] [False] == []
+    - selectElems [] [True] == []
+    - selectElems [1] [False] == []
+    - selectElems [1] [True] == [1]
+    - selectElems "Hello!" [False,True,True,True,True,False] == "ello"
+    - selectElems [1..] [True,False,True,False,True] == [1,3,5]
+    - selectElems [1..10] [False,False ..] == []
+    - selectElems [1..10] [True,True ..] == [1..10]
+}
+
+optional "congruentElems" {
+    points = 3
+    pretest =
+    - congruentElems
+    tests =
+    - congruentElems 1 1 [] == []
+    - congruentElems 2 1 [] == []
+    - congruentElems 3 0 [] == []
+    - congruentElems 3 3 [] == []
+    - congruentElems 2 0 [1..10] == [2,4,6,8,10]
+    - congruentElems 2 1 [1..10] == [1,3,5,7,9]
+    - congruentElems 2 2 [1..10] == [2,4,6,8,10]
+    - congruentElems 2 3 [1..10] == [1,3,5,7,9]
+    - congruentElems 3 0 [1..10] == [3,6,9]
+    - congruentElems 3 1 [1..10] == [1,4,7,10]
+    - congruentElems 3 2 [1..10] == [2,5,8]
+    - congruentElems 1 0 [1..10] == [1..10]
+    - congruentElems 1 1 [1..10] == [1..10]
+    - congruentElems 1 2 [1..10] == [1..10]
+    - take 10 (congruentElems 5 2 [7,14..]) == [7,42,77,112,147,182,217,252,287,322]
+}

@@ -1,0 +1,69 @@
+general {
+  module = haskell
+  grade = True
+  language = hu
+  minscore = 1
+}
+
+haskell {
+  safemode = True
+  autofix = True
+    ghcoptions =
+    - fdefer-type-errors
+}
+
+optional "collatzFn" {
+    points = 1
+    pretest =
+    - collatzFn
+    tests =
+    - collatzFn 0 == 0
+    - collatzFn 1 == 4
+    - collatzFn 2 == 1
+    - collatzFn 3 == 10
+    - collatzFn 4 == 2
+    - collatzFn 5 == 16
+    - collatzFn 6 == 3
+    - collatzFn 7 == 22
+    - collatzFn 8 == 4
+    - collatzFn 9 == 28
+    - collatzFn 10 == 5
+    - collatzFn 67 == 202
+    - collatzFn 420 == 210
+}
+
+optional "sumNeighbours" {
+    points = 2
+    pretest =
+    - sumNeighbours
+    tests =
+    - sumNeighbours [] == []
+    - sumNeighbours [1] == []
+    - sumNeighbours [1,2] == [3]
+    - sumNeighbours [1,2,3] == [3,5]
+    - sumNeighbours [1,2,3,4] == [3,5,7]
+    - sumNeighbours [1,2,3,4,5] == [3,5,7,9]
+    - sumNeighbours [1,2,3,4,5,6] == [3,5,7,9,11]
+    - sumNeighbours [1,1,1,1] == [2,2,2]
+    - sumNeighbours [1,0,1,0,1] == [1,1,1,1]
+    - take 10 (sumNeighbours [1..]) == [3,5..21]
+}
+
+optional "elemsInRange" {
+    points = 3
+    pretest =
+    - elemsInRange
+    tests =
+    - elemsInRange (0, 0) [] == []
+    - elemsInRange (0, 1) [] == []
+    - elemsInRange (1, 0) [] == []
+    - elemsInRange (0, 1) [0] == [0]
+    - elemsInRange (1, 0) [0] == [0]
+    - elemsInRange (0, 0) [0,1,-1,0] == [0,0]
+    - elemsInRange (3, 7) [1,4,6,0,8,5,9,3,7,2] == [4,6,5,3,7]
+    - elemsInRange (7, 3) [1,4,6,0,8,5,9,3,7,2] == [4,6,5,3,7]
+    - elemsInRange (5, 10) [0..20] == [5..10]
+    - elemsInRange (10, 5) [0..20] == [5..10]
+    - elemsInRange ('e', 'v') ['a'..'z'] == ['e'..'v']
+    - elemsInRange ('v', 'e') ['a'..'z'] == ['e'..'v']
+}
